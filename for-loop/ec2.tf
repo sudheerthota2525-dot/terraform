@@ -1,15 +1,16 @@
 resource "aws_instance" "terraform" {
+    for_each = var.instances
     ami = "ami-09c813fb71547fc4f"
-    instance_type = var.environment == "dev" ? "t3.micro" : "t3.medium"
-    vpc_security_group_ids = [aws_security_group.allow_all_tf.id]
+    instance_type = each.value
+    vpc_security_group_ids = [aws_security_group.allow_all-tf.id]
     tags = {
-        Name = "terraform"
+        Name = each.key
         Terraform = "true"
     }
 }
 
-resource "aws_security_group" "allow_all_tf" {
-  name   = "allow-all_tf"
+resource "aws_security_group" "allow_all-tf" {
+  name   = "allow-all-tf"
 
   egress {
     from_port        = 0 # from port 0 to to port 0 means all ports
