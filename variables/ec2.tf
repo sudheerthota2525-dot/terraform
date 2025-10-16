@@ -5,7 +5,7 @@ resource "aws_instance" "terraform" {
     tags = var.ec2_tags
 }
 
-resource "aws_security_group" "allow-all_tf" {
+resource "aws_security_group" "allow_all_tf" {
   name   = var.sg_name
 
   egress {
@@ -23,7 +23,7 @@ resource "aws_security_group" "allow-all_tf" {
   }
 
   tags = {
-    Name = "allow-all"
+    Name = "allow-all-tf"
   }
 
 }
